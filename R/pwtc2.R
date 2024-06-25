@@ -6,7 +6,7 @@ pwtc2 <- function(y, x1, x2, x3, pad = TRUE, dj = 1 / 12, s0 = 2 * dt,
 
   mother <- match.arg(tolower(mother), MOTHERS)
 
-  checked <- check.data(y = y, x1 = x1, x2 = x2, x3 = x3)
+  checked <- check.data(y = y, x1 = x1, x2 = x2)
   xaxis <- y[, 1]
   dt <- checked$y$dt
   t <- checked$y$t
