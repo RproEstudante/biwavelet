@@ -1,5 +1,5 @@
 
-pwtc2 <- function(y, x1, x2, x3 pad = TRUE, dj = 1 / 12, s0 = 2 * dt,
+pwtc2 <- function(y, x1, x2, x3, pad = TRUE, dj = 1 / 12, s0 = 2 * dt,
                  J1 = NULL, max.scale = NULL, mother = "morlet",
                  param = -1, lag1 = NULL, sig.level = 0.95,
                  sig.test = 0, nrands = 300, quiet = FALSE) {
