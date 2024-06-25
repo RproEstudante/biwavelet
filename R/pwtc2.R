@@ -58,7 +58,7 @@ pwtc2 <- function(y, x1, x2, x3, pad = TRUE, dj = 1 / 12, s0 = 2 * dt,
   smooth.wt_x3 <- smooth.wavelet(
     s.inv * (abs(wt.x3$wave) ^ 2), dt, dj, wt.x3$scale)
 
-  coi <- pmin(wt.y$coi, wt.x1$coi, wt.x2$coi, smooth.wt_x3,na.rm = T)
+  coi <- pmin(wt.y$coi, wt.x1$coi, wt.x2$coi, wt.x3$coi,na.rm = T)
 
   # Cross-wavelet computation
 
