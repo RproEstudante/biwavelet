@@ -86,12 +86,22 @@ rsq.x1x2 <- abs(smooth.cw_x1x2) ^ 2 / (smooth.wt_x1 * smooth.wt_x2)
 rsq.x1x3 <- abs(smooth.cw_x1x3) ^ 2 / (smooth.wt_x1 * smooth.wt_x3)
 rsq.x2x3 <- abs(smooth.cw_x2x3) ^ 2 / (smooth.wt_x2 * smooth.wt_x3)
 
-# Compute the normalization factor
-norm <- (1 - rsq.yx2) * (1 - rsq.x1x2) * (1 - rsq.x2x3)
+# Define coherences for readability
+rho_12 <- sqrt(rsq.yx1)
+rho_13 <- sqrt(rsq.yx2)
+rho_14 <- sqrt(rsq.yx3)
+rho_23 <- sqrt(rsq.x1x2)
+rho_24 <- sqrt(rsq.x1x3)
+rho_34 <- sqrt(rsq.x2x3)
+
+# Compute the numerator
+numerator <- abs(rho_12 - rho_13 * rho_32 - rho_14 * rho_42 + rho_13 * rho_34 * rho_42)
+
+# Compute the normalization factor (denominator)
+denominator <- sqrt((1 - rho_13^2 - rho_14^2 + rho_13^2 * rho_34^2) * (1 - rho_23^2 - rho_24^2 + rho_23^2 * rho_34^2))
 
 # Compute the partial wavelet coherence
-rsq <- abs(sqrt(rsq.yx1) - sqrt(rsq.yx2) * Conj(sqrt(rsq.x1x2)) - sqrt(rsq.yx3) * Conj(sqrt(rsq.x2x3))) ^ 2 / norm
-  
+rsq <- numerator^2 / denominator
 
   # Phase difference between y and x1
   phase <- atan2(Im(cw.yx1), Re(cw.yx1))
