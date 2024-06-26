@@ -97,8 +97,8 @@ rsq.x2x3 <- abs(smooth.cw_x2x3) ^ 2 / (smooth.wt_x2 * smooth.wt_x3)
   c22 <- 1 - rsq.x2x3 - rsq.yx2 - rsq.yx3 + 2 * Re(q.yx2 * q.x2x3 * q.yx3)
   c21 <-  q.yx1 * (1 - rsq.x2x3) - q.x1x2 * (q.yx2  - q.x2x3 * q.yx3) + q.x1x3 * (q.yx2 *  q.x2x3  - q.yx3)
   norm <- c11 * c22
-# Calcular Q12:3
-rsq <- abs(c21) ^ 2/ norm
+# Calcular Q12:34
+rsq <- abs(c21)/ sqrt(norm)
 
   # Phase difference between y and x1
   phase <- atan2(Im(cw.yx1), Re(cw.yx1))
