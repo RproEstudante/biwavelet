@@ -94,8 +94,8 @@ rsq.x2x3 <- abs(smooth.cw_x2x3) ^ 2 / (smooth.wt_x2 * smooth.wt_x3)
   q.x2x3 <- Conj(sqrt(rsq.x2x3))
 
   c11 <- 1- rsq.x2x3 - rsq.x1x2 - rsq.x1x3 + 2*Re(q.x1x2*q.x2x3*q.x1x3)
-  C22 <- 1 - rsq.x2x3 - rsq.yx2 - rsq.yx3 + 2 * Re(q.yx2 * q.x2x3 * q.yx3)
-  C21 <- C21 <- q.yx1 * (1 - rsq.x2x3) - q.x1x2 * (q.yx2  - q.x2x3 * q.yx3) + q.x1x3 * (q.yx2 *  q.x2x3  - q.yx3)
+  c22 <- 1 - rsq.x2x3 - rsq.yx2 - rsq.yx3 + 2 * Re(q.yx2 * q.x2x3 * q.yx3)
+  c21 <-  q.yx1 * (1 - rsq.x2x3) - q.x1x2 * (q.yx2  - q.x2x3 * q.yx3) + q.x1x3 * (q.yx2 *  q.x2x3  - q.yx3)
   norm <- c11 * c22
 # Calcular Q12:3
 rsq <- abs(c21) ^ 2/ norm
