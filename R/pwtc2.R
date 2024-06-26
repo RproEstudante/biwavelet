@@ -86,29 +86,19 @@ rsq.x1x2 <- abs(smooth.cw_x1x2) ^ 2 / (smooth.wt_x1 * smooth.wt_x2)
 rsq.x1x3 <- abs(smooth.cw_x1x3) ^ 2 / (smooth.wt_x1 * smooth.wt_x3)
 rsq.x2x3 <- abs(smooth.cw_x2x3) ^ 2 / (smooth.wt_x2 * smooth.wt_x3)
 
- r.yx1 <- sqrt(rsq.yx1)
-  r.yx2 <- sqrt(rsq.yx2)
-  r.yx3 <- sqrt(rsq.yx3)
-  r.x1x2 <- sqrt(rsq.x1x2)
-  r.x1x3 <- sqrt(rsq.x1x3)
-  r.x2x3 <- sqrt(rsq.x2x3)
+ q.yx1 <- sqrt(rsq.yx1)
+  q.yx2 <- sqrt(rsq.yx2)
+  q.yx3 <- sqrt(rsq.yx3)
+  q.x1x2 <- Conj(sqrt(rsq.x1x2))
+  q.x1x3 <- Conj(sqrt(rsq.x1x3))
+  q.x2x3 <- Conj(sqrt(rsq.x2x3))
 
-  # Wavelet coherence
-  Cxxd <- 1 - r.x1x2^2 - r.x1x3^2 - r.x2x3^2 + 2 * Re(r.x1x2 * r.x2x3 * Conj(r.x1x3) )
-
-  Cd <- 1 - r.yx1^2 - r.yx2^2 - r.yx3^2 - r.x1x2^2 - r.x1x3^2 - r.x2x3^2
-  Cd <- Cd + (r.yx3^2 * r.x1x2^2)
-  Cd <- Cd + (r.yx1^2 * r.x2x3^2)
-  Cd <- Cd + (r.yx2^2 * r.x1x3^2)
-  Cd <- Cd + 2 * Re(r.yx1 * r.x1x3 * Conj(r.yx3))
-  Cd <- Cd + 2 * Re(r.yx2 * r.x2x3 * Conj(r.yx3))
-  Cd <- Cd + 2 * Re(r.yx1 * r.x1x2 * Conj(r.yx2))
-  Cd <- Cd + 2 * Re(r.x1x2 * r.x2x3 * Conj(r.x1x3))
-  Cd <- Cd - 2 * Re(r.yx1 * r.x1x2 * r.x2x3 * Conj(r.yx3))
-  Cd <- Cd - 2 * Re(r.yx2 * Conj(r.yx1) * r.x2x3 * Conj(r.x1x3))
-  Cd <- Cd - 2 * Re(r.yx2 * Conj(r.yx3) * r.x1x3 * Conj(r.x1x2))
-
-  rsq <- 1 - (Cd / Cxxd)
+  c11 <- 1- rsq.x2x3 - rsq.x1x2 - rsq.x1x3 + 2*Re(q.x1x2*q.x2x3*q.x1x3)
+  C22 <- 1 - rsq.x2x3 - rsq.yx2 - rsq.yx3 + 2 * Re(q.yx2 * q.x2x3 * q.yx3)
+  C21 <- C21 <- q.yx1 * (1 - rsq.x2x3) - q.x1x2 * (q.yx2  - q.x2x3 * q.yx3) + q.x1x3 * (q.yx2 *  q.x2x3  - q.yx3)
+  norm <- c11 * c22
+# Calcular Q12:3
+rsq <- abs(c21) ^ 2/ norm
 
   # Phase difference between y and x1
   phase <- atan2(Im(cw.yx1), Re(cw.yx1))
