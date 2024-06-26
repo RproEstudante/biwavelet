@@ -94,6 +94,12 @@ rho_23 <- sqrt(rsq.x1x2)
 rho_24 <- sqrt(rsq.x1x3)
 rho_34 <- sqrt(rsq.x2x3)
 
+# Assume rho_32, rho_42, and others are the same as rho_23, rho_24, etc.
+# Here, we should consider that rho_ij and rho_ji are the same in real-valued coherencies.
+
+rho_32 <- rho_23
+rho_42 <- rho_24
+
 # Compute the numerator
 numerator <- abs(rho_12 - rho_13 * rho_32 - rho_14 * rho_42 + rho_13 * rho_34 * rho_42)
 
